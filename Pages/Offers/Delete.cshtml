@@ -1,0 +1,33 @@
+﻿@page "/Delete/{Id}"
+@model OtoMoto.Pages.Offers.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="marg">
+
+    <h2>Czy na pewno chcesz usunąć ofertę "@Model.Offer?.Title" utworzoną @Model.Offer?.DataUtworzenia.ToString("yyyy-MM-dd")?</h2>
+    <div class="row" style="justify-content: center">
+        <form method="post">
+            <input type="hidden" name="Value" value="@Model.Offer?.Id" />
+            <button class="btn btn-primary" type="submit">Tak</button>
+        </form>
+
+        <button class="btn btn-danger" onclick="goBack()">Nie</button>
+    </div>
+</div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <style>
+        .marg {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+            margin-left: 20px;
+            text-align: center;
+        }
+    </style>

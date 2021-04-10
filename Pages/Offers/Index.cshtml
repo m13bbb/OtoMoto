@@ -1,0 +1,69 @@
+﻿@page "/"
+
+@model OtoMoto.Pages.Offers.IndexModel
+@{
+    ViewData["Title"] = "Strona Główna";
+}
+
+<h1>Lista Ogłoszeń</h1>
+
+@foreach (var item in Model.Offers)
+{
+<div class="box">
+
+    <div class="marg">
+        <h1>@item.Title</h1>
+    </div>
+
+
+
+        <div class="row" style="justify-content: center">
+
+            <div class="col">
+                @foreach (var img in item.Images)
+                {
+                    <img src="/Files/@img.Id" width="320" height="240" />
+                    <br />
+                    <br />
+                }
+            </div>
+
+            <div class="col">
+                <div class="marg">
+                    <h2>@item.Make @item.Model</h2>
+                    <h4>@item.Description</h4>
+                    <h3>@item.Cena zł</h3>
+                    <h3>Kontakt: @item.Kontakt</h3>
+                    <h4>Rok produkcji @item.Rocznik, Przebieg: @item.Przebieg km, @item.NadwoziePojazdu.Nazwa, @item.TypPaliwa.Nazwa</h4>
+                </div>
+            </div>
+        </div>
+
+
+        @if (this.User.Identity.Name == item.CreatedBy.Email || this.User.IsInRole(Consts.AdminRoleName))
+        {
+            <br />
+            <a class="btn btn-danger" role="button" href="/Delete/@item.Id">Usuń ogłoszenie</a>}
+        <br />
+        <br />
+    </div>
+
+
+    }
+
+
+    <style>
+        .box {
+            border: 2px solid gray;
+            margin: 5px;
+            text-align: center;
+        }
+
+        .marg {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+            margin-left: 20px;
+            text-align: center;
+        }
+    </style>

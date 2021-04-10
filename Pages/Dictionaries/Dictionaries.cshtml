@@ -1,0 +1,77 @@
+﻿@page "/Dictionaries"
+@model OtoMoto.Pages.Dictionaries.DictionariesModel
+@{
+    ViewData["Title"] = "Słownik";
+}
+
+<br />
+<div id="Paliwo" class="limited">
+    <b>Typy paliwa:</b>
+    <ul class="list-group">
+        @foreach (var item in this.Model.TypyPaliwa)
+        {
+            <li id="@item.Id" class="list-group-item">@item.Nazwa<button type="button" style="float: right;" onclick="usun('@item.Id', 'Delete1' )" class="btn btn-danger btn-sm">Usuń</button></li>
+        }
+    </ul>
+
+    <form asp-page-handler="Paliwo" method="post">
+        <div class="form-group">
+            <label>Dodaj typ paliwa</label>
+            <input type="text" name="Nazwa" class="form-control" placeholder="Nazwa">
+        </div>
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </form>
+</div>
+
+<hr />
+<br />
+
+<div id="Nadwozie" class="limited">
+    <b>Typy nadwozia:</b>
+    <ul class="list-group">
+        @foreach (var item in this.Model.TypyNadwozia)
+        {
+            <li id="@item.Id" class="list-group-item">@item.Nazwa<button type="button" style="float: right;" onclick="usun('@item.Id', 'Delete2' )" class="btn btn-danger btn-sm">Usuń</button></li>
+        }
+    </ul>
+
+    <form asp-page-handler="Nadwozie" method="post">
+        <div class="form-group">
+            <label>Dodaj typ nadwozia</label>
+            <input type="text" name="Nazwa" class="form-control" placeholder="Nazwa">
+        </div>
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </form>
+</div>
+
+<style>
+    .limited
+    {
+        width: 30%;
+    }
+</style>
+
+<script>
+    function usun(Id, name)
+    {
+        var xhr = new XMLHttpRequest();
+        // we defined the xhr
+
+        xhr.onreadystatechange = function ()
+        {
+            if (this.readyState != 4) return;
+
+            if (this.status == 200) {
+                window.location.reload(false);
+                // we get the returned data
+            }
+            else {
+                window.location.reload(false);
+            }
+            // end of state change: it can be after some time (async)
+        };
+
+        xhr.open('GET', `/Dictionaries?handler=${name}&Id=${Id}`, true);
+        xhr.send();
+    }
+</script>

@@ -1,0 +1,33 @@
+﻿@page "/Register"
+@model OtoMoto.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    var error = TempData["ErrorMessage"] as string;
+}
+
+<h1>Rejestracja</h1>
+
+@if (error?.Length > 0)
+{
+    <span style="color:red;">@error</span>
+    <br />
+    <br />
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="usrName">Login</label>
+        <input type="text" name="UserName" class="form-control" placeholder="Wpisz Login">
+        <small id="usrName" class="form-text text-muted">Login (nazwa użytkownika) będzie widoczna dla wszystkich.</small>
+    </div>  
+    <div class="form-group">
+        <label for="exampleInputEmail1">Adres e-mail</label>
+        <input type="email" name="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Wpisz adres e-mail">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Hasło</label>
+        <input type="password" name="Password" class="form-control" id="exampleInputPassword1" placeholder="Wpisz hasło">
+        <small id="password" class="form-text text-muted">Nie podawaj nikomu swojego hasła!</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Zarejestruj</button>
+</form>
